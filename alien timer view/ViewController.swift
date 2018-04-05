@@ -13,6 +13,7 @@ class ViewController: UIViewController {
       var counter = 1
       var myTimer = Timer()
       var direction = true
+      var play = true
       
       @IBOutlet weak var Counter: UILabel!
       @IBOutlet weak var Alienimage: UIImageView!
@@ -24,10 +25,15 @@ class ViewController: UIViewController {
       }
 
       @IBAction func imagestart(_ sender: Any) {
-            myTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector:     #selector(ViewController.doAnimation), userInfo: nil, repeats: true)
-      }
-      @IBAction func imageStop(_ sender: Any) {
-            myTimer.invalidate()
+            
+            if play == false {
+                  myTimer.invalidate()
+                  play = true
+      
+            } else if play == true {
+                    myTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector:     #selector(ViewController.doAnimation), userInfo: nil, repeats: true)
+                  play = false
+            }
       }
       @objc func doAnimation() {
             if counter == 5 {
